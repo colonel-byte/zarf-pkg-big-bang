@@ -1,0 +1,80 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
+  ],
+  assignees: [
+    "@A1994SC"
+  ],
+  packageRules: [
+    {
+      matchDatasources: [
+        "regex"
+      ],
+      addLabels: [
+        "renovate/oci"
+      ],
+      groupName: "all dependencies",
+      groupSlug: "all-docker",
+      matchPackageNames: [
+        "*"
+      ]
+    }
+  ],
+  separateMajorMinor: false,
+  "github-actions": {
+    enabled: false
+  },
+  dependencyDashboard: true,
+  customManagers: [
+    {
+      customType: "regex",
+      description: [
+        "Process custom dependencies"
+      ],
+      managerFilePatterns: [
+        "/(^|/).+\\.ya?ml(\\.j2)?$/"
+      ],
+      matchStrings: [
+        "(?m:renovate: datasource=(?<datasource>.+) depName=(?<depName>\\S+)\\n\\s+(version: |tag: |-.+:)(?<currentValue>(.+))$)"
+      ],
+      datasourceTemplate: "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}"
+    },
+    {
+      customType: "regex",
+      datasourceTemplate: "custom.ceph",
+      managerFilePatterns: [
+        "/^values/.+\\.ya?ml(\\.j2)?$/"
+      ],
+      versioningTemplate: "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+      matchStrings: [
+        "(?m:renovate-ceph\\n\\s+.+:(?<currentValue>(v[0-9\\.]+)))"
+      ],
+      depNameTemplate: "quay.io/ceph/ceph"
+    },
+    {
+      customType: "regex",
+      description: [
+        "Process custom dependencies"
+      ],
+      managerFilePatterns: [
+        "/(^|/)\\.github/renovate.json(5)?$/"
+      ],
+      matchStrings: [
+        "(?m:defaultRegistryUrlTemplate.+?(?<currentValue>(?:[0-9]+\\.?){3}))"
+      ],
+      datasourceTemplate: "git-tags",
+      depNameTemplate: "https://github.com/rook/rook.git"
+    },
+  ],
+  customDatasources: {
+    ceph: {
+      defaultRegistryUrlTemplate: "https://raw.githubusercontent.com/rook/rook/refs/tags/v1.17.6/deploy/charts/rook-ceph-cluster/values.yaml",
+      format: "yaml",
+      transformTemplates: [
+        "($pkg := cephClusterSpec.cephVersion.image; $vrs := $replace($pkg, /^q.+:/, ''); {\"releases\": [{\"version\": $vrs, \"sourceUrl\": \"https://github.com/ceph/ceph\"}]})"
+      ]
+    }
+  }
+}
