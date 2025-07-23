@@ -1,0 +1,41 @@
+---
+name: Populate Renovate resources
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: write
+  id-token: write # needed for keyless signing
+jobs:
+  resources:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'renovate[bot]' }}
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Configure gitsign
+        uses: chainguard-dev/actions/setup-gitsign@5363dd9eb48083bbf7674a4bbe62d71c3b230edd # v1.1.2
+
+      - name: Install The Latest Release Version of Zarf
+        uses: zarf-dev/setup-zarf@10e539efed02f75ec39eb8823e22a5c795f492ae # v1.0.1
+
+      - name: Update manifests
+        env:
+          GH_TOKEN: ${{ github.token }}
+        if: ${{ !startsWith(github.ref, 'refs/heads/renovate/') }}
+        run: |-
+          ./.github/hack/zarf.sh
+
+      - name: Commit & Push changes
+        uses: actions-js/push@5a7cbd780d82c0c937b5977586e641b2fd94acc5 # v1.5
+        with:
+          branch: ${{ github.head_ref }}
+          message: "chore(resources): updated resources files"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          author_name: renovate[bot]
+          author_email: <29139614+renovate[bot]@users.noreply.github.com>

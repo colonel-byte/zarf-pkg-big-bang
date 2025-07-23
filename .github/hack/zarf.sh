@@ -3,7 +3,6 @@
 set -u
 set -o pipefail
 
-# renovate: dep
 export BB_VERSION="3.2.0"
 
 rm -rf ./.direnv/bigbang
