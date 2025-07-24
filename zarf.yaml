@@ -8,53 +8,9 @@ metadata:
   annotations:
     org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
     org.opencontainers.image.description: Zarf package for deploying big-bang
-x-tra:
-  - name: charts
-    required: false
-    images:
-      - registry1.dso.mil/bigbang/k8s-monitoring:2.0.27-bb.3
-      - registry1.dso.mil/bigbang/anchore:3.7.0-bb.0
-      - registry1.dso.mil/bigbang/argocd:8.0.10-bb.0
-      - registry1.dso.mil/bigbang/authservice:1.0.4-bb.3
-      - registry1.dso.mil/bigbang/bbctl:2.0.0-bb.3
-      - registry1.dso.mil/bigbang/eck-operator:3.0.0-bb.0
-      - registry1.dso.mil/bigbang/elasticsearch-kibana:1.30.0-bb.2
-      - registry1.dso.mil/bigbang/fluentbit:0.49.0-bb.1
-      - registry1.dso.mil/bigbang/fortify-ssc:1.1.2320154-bb.28
-      - registry1.dso.mil/bigbang/gatekeeper:3.19.1-bb.0
-      - registry1.dso.mil/bigbang/gitlab:9.1.0-bb.0
-      - registry1.dso.mil/bigbang/gitlab-runner:0.77.2-bb.0
-      - registry1.dso.mil/bigbang/grafana:9.2.7-bb.0
-      - registry1.dso.mil/bigbang/harbor:1.17.1-bb.1
-      - registry1.dso.mil/bigbang/istio-crds:1.26.1-bb.0
-      - registry1.dso.mil/bigbang/istiod:1.26.1-bb.0
-      - registry1.dso.mil/bigbang/keycloak:7.0.1-bb.0
-      - registry1.dso.mil/bigbang/kiali:2.10.0-bb.2
-      - registry1.dso.mil/bigbang/kyverno:3.3.6-bb.5
-      - registry1.dso.mil/bigbang/kyverno-policies:3.3.4-bb.10
-      - registry1.dso.mil/bigbang/kyverno-reporter:3.1.4-bb.0
-      - registry1.dso.mil/bigbang/loki:6.30.1-bb.2
-      - registry1.dso.mil/bigbang/mattermost:10.9.1-bb.2
-      - registry1.dso.mil/bigbang/mattermost-operator:1.23.0-bb.0
-      - registry1.dso.mil/bigbang/metrics-server:3.12.2-bb.4
-      - registry1.dso.mil/bigbang/minio-instance:7.1.1-bb.3
-      - registry1.dso.mil/bigbang/minio-operator:7.1.1-bb.0
-      - registry1.dso.mil/bigbang/monitoring:73.2.0-bb.0
-      - registry1.dso.mil/bigbang/neuvector:2.8.6-bb.0
-      - registry1.dso.mil/bigbang/nexus-repository-manager:81.1.0-bb.0
-      - registry1.dso.mil/bigbang/gateway:1.26.1-bb.2
-      - registry1.dso.mil/bigbang/promtail:6.16.6-bb.5
-      - registry1.dso.mil/bigbang/gateway:1.26.1-bb.2
-      - registry1.dso.mil/bigbang/sonarqube:10.7.0-bb.6
-      - registry1.dso.mil/bigbang/tempo:1.21.1-bb.0
-      - registry1.dso.mil/bigbang/thanos:16.0.2-bb.0
-      - registry1.dso.mil/bigbang/twistlock:0.21.0-bb.0
-      - registry1.dso.mil/bigbang/vault:0.30.0-bb.7
-      - registry1.dso.mil/bigbang/velero:10.0.1-bb.0
-      - registry1.dso.mil/bigbang/bigbang:3.2.0
 components:
-  - name: charts
-    required: false
+  - name: bigbang-charts
+    required: true
     images:
       - registry1.dso.mil/bigbang/k8s-monitoring:2.0.27-bb.3
       - registry1.dso.mil/bigbang/anchore:3.7.0-bb.0
@@ -96,1050 +52,310 @@ components:
       - registry1.dso.mil/bigbang/vault:0.30.0-bb.7
       - registry1.dso.mil/bigbang/velero:10.0.1-bb.0
       - registry1.dso.mil/bigbang/bigbang:3.2.0
-  - name: istio-crds
-    required: false
+  - name: anchore
+    x-version: 3.7.0-bb.0
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-  - name: istiod
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-  - name: istio-gateway
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-  - name: kiali
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/grafana/tempo:2.7.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v2.10.0"
-      - "registry1.dso.mil/ironbank/opensource/kiali/kiali:v2.10.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-  - name: gatekeeper
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/openpolicyagent/gatekeeper:v3.18.2"
-      - "registry1.dso.mil/ironbank/opensource/openpolicyagent/gatekeeper:v3.19.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.4"
-  - name: kyverno
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.5"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernocli:v1.13.4"
-      - "registry1.dso.mil/ironbank/frontiertechnology/cortex/busybox:v1.37.0"
-  - name: kyverno-policies
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-  - name: kyverno-reporter
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.1"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3"
-      - "registry1.dso.mil/ironbank/nirmata/policy-reporter/policy-reporter-ui:2.3.10"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/policy-reporter/kyverno-plugin:0.4.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/policy-reporter:3.1.1"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1"
-  - name: elasticsearch-kibana
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/elastic/eck-operator/eck-operator:3.0.0"
-      - "registry1.dso.mil/ironbank/elastic/elasticsearch/elasticsearch:9.0.1"
-      - "registry1.dso.mil/ironbank/elastic/kibana/kibana:9.0.3"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/opensource/bitnami/elasticsearch-exporter:1.9.0"
-  - name: eck-operator
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/elastic/eck-operator/eck-operator:3.0.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-  - name: fluentbit
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/elastic/eck-operator/eck-operator:3.0.0"
-      - "registry1.dso.mil/ironbank/elastic/elasticsearch/elasticsearch:9.0.1"
-      - "registry1.dso.mil/ironbank/elastic/kibana/kibana:9.0.1"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/fluent/fluent-bit:4.0.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.4"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-  - name: promtail
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/loki:3.5.1"
-      - "registry1.dso.mil/ironbank/opensource/grafana/promtail:v3.5.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-22T22-12-26Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-      - "registry1.dso.mil/ironbank/opensource/nginx/nginx:1.27.5"
-  - name: loki
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.2"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/loki:3.5.1"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-22T22-12-26Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-      - "registry1.dso.mil/ironbank/opensource/nginx/nginx:1.28.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6"
-      - "registry1.dso.mil/ironbank/grafana/grafana-enterprise-logs:v3.5.1"
-      - "registry1.dso.mil/ironbank/ironbank/opensource/grafana/enterprise-logs-provisioner:3.5.1"
-      - "registry1.dso.mil/ironbank/bigbang/grafana/loki-helm-test:0.0.1"
-      - "registry1.dso.mil/ironbank/bigbang/grafana/loki-canary:3.5.1"
-      - "registry1.dso.mil/ironbank/opensource/memcached/memcached:1.6.38"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/memcached-exporter:v0.15.3"
-  - name: neuvector
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/neuvector/neuvector/controller:5.4.4"
-      - "registry1.dso.mil/ironbank/neuvector/neuvector/enforcer:5.4.4"
-      - "registry1.dso.mil/ironbank/neuvector/neuvector/manager:5.4.4"
-      - "registry1.dso.mil/ironbank/neuvector/neuvector/scanner:6"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/neuvector/neuvector/prometheus-exporter:5.3.2"
-      - "registry1.dso.mil/ironbank/neuvector/neuvector/prometheus-exporter:1-1.0.0"
-  - name: tempo
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:11.6.1"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/tempo:2.7.2"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/blackbox_exporter:v0.26.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.3.1"
-      - "registry1.dso.mil/ironbank/opensource/grafana/tempo-query:2.7.2"
-  - name: monitoring
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.1"
-      - "registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/snmp_exporter:v0.29.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/blackbox_exporter:v0.26.0"
-      - "registry1.dso.mil/ironbank/opensource/bats/bats:1.12.0"
-      - "registry1.dso.mil/ironbank/opensource/thanos/thanos:v0.38.0"
-  - name: grafana
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.2"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1"
-      - "registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6"
-      - "registry1.dso.mil/ironbank/opensource/bats/bats:1.12.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer:3.12.7"
-  - name: twistlock
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/twistlock/console/console:34.01.126"
-      - "registry1.dso.mil/ironbank/twistlock/defender/defender:34.01.126"
-      - "registry1.dso.mil/ironbank/twistlock/defender/defender:34.01.126"
-  - name: bbctl
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.2"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/loki:3.5.1"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-22T22-12-26Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-05-24T17-08-30Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-      - "registry1.dso.mil/ironbank/opensource/nginx/nginx:1.27.5"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1"
-      - "registry1.dso.mil/ironbank/big-bang/bbctl:1.4.0"
-      - "registry1.dso.mil/ironbank/opensource/yq/yq:4.45.4"
-      - "registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.10"
-  - name: alloy
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.1"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/loki:3.5.1"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-22T22-12-26Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-      - "registry1.dso.mil/ironbank/opensource/nginx/nginx:1.27.5"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.3.1"
+      - registry1.dso.mil/ironbank/bitnami/redis:7.4.3
+      - registry1.dso.mil/ironbank/anchore/enterprise/enterprise:5.17.0-amd64
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql:16.2
+      - registry1.dso.mil/ironbank/anchore/enterpriseui/enterpriseui:5.17.0-amd64
   - name: argocd
-    required: false
+    x-version: 8.0.10-bb.0
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/big-bang/argocd:v3.0.6"
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/bitnami/analytics/redis-exporter:v1.73.0"
-      - "registry1.dso.mil/ironbank/bitnami/redis:8.0.2"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/dexidp/dex:v2.43.1"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-  - name: backstage
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/backstage:1.0.8"
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.3.1"
+      - registry1.dso.mil/ironbank/big-bang/argocd:v3.0.6
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/opensource/dexidp/dex:v2.43.1
+      - registry1.dso.mil/ironbank/bitnami/redis:8.0.2
+      - registry1.dso.mil/ironbank/bitnami/analytics/redis-exporter:v1.73.0
   - name: authservice
-    required: false
+    x-version: 1.0.4-bb.3
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/bitnami/redis:7.4.3"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/istio-ecosystem/authservice:1.0.4-ubi9"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-  - name: minio-operator
-    required: false
+      - registry1.dso.mil/ironbank/istio-ecosystem/authservice:1.0.4-ubi9
+      - registry1.dso.mil/ironbank/bitnami/redis:7.4.3
+  - name: bbctl
+    x-version: 2.0.0-bb.3
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-03T14-56-28Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-  - name: minio
-    required: false
+      - registry1.dso.mil/ironbank/big-bang/bbctl:1.4.0
+      - registry1.dso.mil/ironbank/opensource/yq/yq:4.45.4
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.10
+  - name: eck-operator
+    x-version: 3.0.0-bb.0
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-05-24T17-08-30Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
+      - registry1.dso.mil/ironbank/elastic/eck-operator/eck-operator:3.0.0
+  - name: elasticsearch-kibana
+    x-version: 1.30.0-bb.2
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/elastic/kibana/kibana:9.0.3
+      - registry1.dso.mil/ironbank/elastic/elasticsearch/elasticsearch:9.0.1
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/opensource/bitnami/elasticsearch-exporter:1.9.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6
+  - name: fluentbit
+    x-version: 0.49.0-bb.1
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/fluent/fluent-bit:4.0.3
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+  - name: fortify-ssc
+    x-version: 1.1.2320154-bb.28
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/microfocus/fortify/ssc:25.2.0.0157
+      - registry1.dso.mil/ironbank/bitnami/mysql8:8.0.36-debian-11-r1
+      - registry1.dso.mil/ironbank/google/golang/ubi9/golang-1.24:1.24.4
+  - name: gatekeeper
+    x-version: 3.19.1-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/openpolicyagent/gatekeeper:v3.19.1
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.4
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+  - name: gateway
+    x-version: 1.26.1-bb.2
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1
   - name: gitlab
-    required: false
+    x-version: 9.1.0-bb.0
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/bitnami/analytics/redis-exporter:v1.74.0"
-      - "registry1.dso.mil/ironbank/bitnami/postgres:17.4.0"
-      - "registry1.dso.mil/ironbank/bitnami/redis:8.0.2"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/certificates:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/cfssl-self-sign:1.6.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitaly:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-base:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-container-registry:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-shell:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-sidekiq:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-toolbox:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-webservice:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-workhorse:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/kubectl:18.1.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/mc:RELEASE.2024-10-02T08-27-28Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2024-06-04T19-20-08Z"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-exporter:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/kubectl:18.1.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-pages:18.1.0"
-      - "registry1.dso.mil/ironbank/opensource/postgres/postgresql:17.5"
-      - "registry1.dso.mil/ironbank/redhat/ubi/ubi9:9.6"
-      - "registry1.dso.mil/bigbang-ci/gitlab-tester:0.0.4"
+      - registry1.dso.mil/ironbank/bitnami/analytics/redis-exporter:v1.74.0
+      - registry1.dso.mil/ironbank/bitnami/redis:8.0.2
+      - registry1.dso.mil/ironbank/gitlab/gitlab/certificates:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/cfssl-self-sign:1.6.1
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitaly:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-container-registry:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-shell:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-sidekiq:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-toolbox:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-webservice:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-workhorse:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-pages:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/kubectl:18.1.0
+      - registry1.dso.mil/ironbank/opensource/minio/mc:RELEASE.2024-10-02T08-27-28Z
+      - registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2024-06-04T19-20-08Z
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql:17.5
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi9:9.6
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-base:18.1.0
+      - registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-exporter:18.1.0
+      - registry1.dso.mil/bigbang-ci/gitlab-tester:0.0.4
   - name: gitlab-runner
-    required: false
+    x-version: 0.77.2-bb.0
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/bitnami/analytics/redis-exporter:v1.73.0"
-      - "registry1.dso.mil/ironbank/bitnami/postgres:17.4.0"
-      - "registry1.dso.mil/ironbank/bitnami/redis:8.0.2"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v18.0.2"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/certificates:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/cfssl-self-sign:1.6.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitaly:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-base:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-container-registry:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-shell:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-sidekiq:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-toolbox:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-webservice:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/gitlab-workhorse:18.0.1"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab/kubectl:18.0.1"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/mc:RELEASE.2024-10-02T08-27-28Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2024-06-04T19-20-08Z"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v18.0.2"
-      - "registry1.dso.mil/ironbank/redhat/ubi/ubi9:9.5"
-  - name: nexus-repository-manager
-    required: false
+      - registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v18.0.2
+      - registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v18.0.2
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi9:9.5
+  - name: grafana
+    x-version: 9.2.7-bb.0
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6"
-      - "registry1.dso.mil/ironbank/sonatype/nexus/nexus:3.81.1-01"
-  - name: sonarqube
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/sonarqube-10:10.7.0-community"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/postgres/postgresql:16.2"
-  - name: fortify
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/bitnami/mysql8:8.0.36-debian-11-r1"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/google/golang/ubi9/golang-1.24:1.24.4"
-      - "registry1.dso.mil/ironbank/microfocus/fortify/ssc:25.2.0.0157"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-  - name: haproxy
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/opensource/haproxy/haproxy22:v2.2.33"
-  - name: anchore-enterprise
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/anchore/enterprise/enterprise:5.16.0"
-      - "registry1.dso.mil/ironbank/anchore/enterpriseui/enterpriseui:5.16.0"
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/bitnami/redis:7.4.2"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/postgres/postgresql:16.2"
-      - "registry1.dso.mil/ironbank/anchore/enterprise/enterprise:5.17.0"
-      - "registry1.dso.mil/ironbank/anchore/enterpriseui/enterpriseui:5.17.0"
-      - "registry1.dso.mil/ironbank/bitnami/redis:7.4.3"
-      - "registry1.dso.mil/ironbank/anchore/enterprise/enterprise:5.17.0-amd64"
-      - "registry1.dso.mil/ironbank/anchore/enterpriseui/enterpriseui:5.17.0-amd64"
-  - name: mattermost-operator
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/mattermost/mattermost-operator:v1.22.1"
-      - "registry1.dso.mil/ironbank/opensource/mattermost/mattermost:10.7.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-03T14-56-28Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-      - "registry1.dso.mil/ironbank/opensource/postgres/postgresql:17.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.82.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.2.1"
-      - "registry1.dso.mil/ironbank/opensource/mattermost/mattermost-operator:v1.23.0"
-  - name: mattermost
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/mattermost/mattermost-operator:v1.23.0"
-      - "registry1.dso.mil/ironbank/opensource/mattermost/mattermost:10.9.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-22T22-12-26Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-      - "registry1.dso.mil/ironbank/opensource/postgres/postgresql:17.5"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-03T14-56-28Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/mc:RELEASE.2025-01-17T23-25-50Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.1.0"
-  - name: velero
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-05-24T17-08-30Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.12.0"
-      - "registry1.dso.mil/ironbank/opensource/velero/velero:v1.16.1"
-      - "registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1"
-      - "registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.12.0"
-      - "registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.12.0"
-      - "registry1.dso.mil/bigbang-ci/velero-tester:1.1.0"
-  - name: keycloak
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.5.7"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.5"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.5"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.5"
-      - "registry1.dso.mil/ironbank/opensource/keycloak/keycloak:26.1.4"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/postgres/postgresql-alpine:15.10"
-      - "registry1.dso.mil/ironbank/opensource/postgres/postgresql-alpine:15.12"
-  - name: vault
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/hashicorp/vault/vault-k8s:v1.6.2"
-      - "registry1.dso.mil/ironbank/hashicorp/vault:1.19.5"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/hashicorp/vault/vault-k8s:v1.7.0"
-      - "registry1.dso.mil/ironbank/hashicorp/vault-csi-provider:v1.5.0"
-  - name: metrics-server
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes-sigs/metrics-server:v0.7.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/blackbox_exporter:v0.26.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.3.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10"
+      - registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.2
+      - registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6
+      - registry1.dso.mil/ironbank/opensource/bats/bats:1.12.0
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer:3.12.7
   - name: harbor
-    required: false
+    x-version: 1.17.1-bb.1
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/bitnami/redis:8.0.2"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/goharbor/harbor-core:v2.13.1"
-      - "registry1.dso.mil/ironbank/opensource/goharbor/harbor-jobservice:v2.13.1"
-      - "registry1.dso.mil/ironbank/opensource/goharbor/harbor-portal:v2.13.1"
-      - "registry1.dso.mil/ironbank/opensource/goharbor/harbor-registryctl:v2.13.1"
-      - "registry1.dso.mil/ironbank/opensource/goharbor/registry:v2.13.1"
-      - "registry1.dso.mil/ironbank/opensource/goharbor/trivy-adapter:v2.13.1"
-      - "registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/nginx/nginx:1.28.0"
-      - "registry1.dso.mil/ironbank/opensource/postgres/postgresql:17.5"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/goharbor/harbor-exporter:v2.13.1"
+      - registry1.dso.mil/ironbank/opensource/nginx/nginx:1.28.0
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-portal:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-core:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-jobservice:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/registry:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-registryctl:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-exporter:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/trivy-adapter:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql:17.5
+      - registry1.dso.mil/ironbank/bitnami/redis:8.0.2
+  - name: istiod
+    x-version: 1.26.1-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1
+      - registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1
+  - name: k8s-monitoring
+    x-version: 2.0.27-bb.3
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3
+      - registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.82.1
+  - name: keycloak
+    x-version: 7.0.1-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:26.1.4
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql-alpine:15.12
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+  - name: kiali
+    x-version: 2.10.0-bb.2
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/kiali/kiali:v2.10.0
+      - registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v2.10.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
+  - name: kyverno
+    x-version: 3.3.6-bb.5
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4
+      - registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10
+      - registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4
+      - registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4
+      - registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4
+      - registry1.dso.mil/ironbank/opensource/kyverno/kyvernocli:v1.13.4
+      - registry1.dso.mil/ironbank/frontiertechnology/cortex/busybox:v1.37.0
+  - name: kyverno-policies
+    x-version: 3.3.4-bb.10
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
+  - name: kyverno-reporter
+    x-version: 3.1.4-bb.0
+    required: true
+    images: []
+  - name: loki
+    x-version: 6.30.1-bb.2
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/grafana/loki:3.5.1
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6
+      - registry1.dso.mil/ironbank/grafana/grafana-enterprise-logs:v3.5.1
+      - registry1.dso.mil/ironbank/ironbank/opensource/grafana/enterprise-logs-provisioner:3.5.1
+      - registry1.dso.mil/ironbank/bigbang/grafana/loki-helm-test:0.0.1
+      - registry1.dso.mil/ironbank/bigbang/grafana/loki-canary:3.5.1
+      - registry1.dso.mil/ironbank/opensource/nginx/nginx:1.28.0
+      - registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-22T22-12-26Z
+      - registry1.dso.mil/ironbank/opensource/memcached/memcached:1.6.38
+      - registry1.dso.mil/ironbank/opensource/prometheus/memcached-exporter:v0.15.3
+      - registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+  - name: mattermost
+    x-version: 10.9.1-bb.2
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/mattermost/mattermost:10.9.1
+      - registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-04-03T14-56-28Z
+      - registry1.dso.mil/ironbank/opensource/minio/mc:RELEASE.2025-01-17T23-25-50Z
+      - registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.1.0
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql:17.5
+      - registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.1.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6
+  - name: mattermost-operator
+    x-version: 1.23.0-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/mattermost/mattermost-operator:v1.23.0
+  - name: metrics-server
+    x-version: 3.12.2-bb.4
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/metrics-server:v0.7.2
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10
+  - name: minio-instance
+    x-version: 7.1.1-bb.3
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-05-24T17-08-30Z
+      - registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11
+  - name: minio-operator
+    x-version: 7.1.1-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/minio/operator:v7.1.1
+  - name: monitoring
+    x-version: 73.2.0-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.1
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6
+      - registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0
+      - registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4
+      - registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1
+      - registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0
+      - registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0
+      - registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1
+      - registry1.dso.mil/ironbank/opensource/prometheus/snmp_exporter:v0.29.0
+      - registry1.dso.mil/ironbank/opensource/prometheus/blackbox_exporter:v0.26.0
+      - registry1.dso.mil/ironbank/opensource/bats/bats:1.12.0
+      - registry1.dso.mil/ironbank/opensource/thanos/thanos:v0.38.0
+      - registry1.dso.mil/ironbank/opensource/thanos/thanos:v0.38.0
+  - name: neuvector
+    x-version: 2.8.6-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/neuvector/neuvector/controller:5.4.4
+      - registry1.dso.mil/ironbank/neuvector/neuvector/enforcer:5.4.4
+      - registry1.dso.mil/ironbank/neuvector/neuvector/manager:5.4.4
+      - registry1.dso.mil/ironbank/neuvector/neuvector/scanner:6
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/neuvector/neuvector/prometheus-exporter:1-1.0.0
+  - name: nexus-repository-manager
+    x-version: 81.1.0-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/sonatype/nexus/nexus:3.81.1-01
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6
+  - name: promtail
+    x-version: 6.16.6-bb.5
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/grafana/promtail:v3.5.1
+  - name: sonarqube
+    x-version: 10.7.0-bb.6
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/big-bang/sonarqube-10:10.7.0-community
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql:16.2
+  - name: tempo
+    x-version: 1.21.1-bb.0
+    required: true
+    images:
+      - registry1.dso.mil/ironbank/opensource/grafana/tempo:2.7.2
+      - registry1.dso.mil/ironbank/opensource/grafana/tempo-query:2.7.2
   - name: thanos
-    required: false
+    x-version: 16.0.2-bb.0
+    required: true
+    images: []
+  - name: twistlock
+    x-version: 0.21.0-bb.0
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:11.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.2.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.5.1"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.5.0"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.2"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/operator:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.23.6"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-01-20T14-49-07Z"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/minio/operator:v7.0.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.81.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.2.1"
-      - "registry1.dso.mil/ironbank/opensource/thanos/thanos:v0.37.2"
-      - "registry1.dso.mil/ironbank/opensource/thanos/thanos:v0.38.0"
-  - name: external-secrets
-    required: false
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/twistlock/console/console:34.01.126
+      - registry1.dso.mil/ironbank/twistlock/defender/defender:34.01.126
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
+  - name: vault
+    x-version: 0.30.0-bb.7
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/external-secrets/external-secrets:v0.18.0"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-  - name: mimir
-    required: false
+      - registry1.dso.mil/ironbank/hashicorp/vault:1.19.5
+      - registry1.dso.mil/ironbank/hashicorp/vault/vault-k8s:v1.7.0
+      - registry1.dso.mil/ironbank/hashicorp/vault-csi-provider:v1.5.0
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+  - name: velero
+    x-version: 10.0.1-bb.0
+    required: true
     images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.1"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3"
-      - "registry1.dso.mil/ironbank/opensource/grafana/mimir:2.16.0"
-      - "registry1.dso.mil/ironbank/opensource/grafana/rollout-operator:v0.27.0"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.3"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.25.2"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/nginx/nginx:1.28.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.82.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.3.1"
-      - "registry1.dso.mil/ironbank/opensource/memcached/memcached:1.6.38"
-      - "registry1.dso.mil/ironbank/opensource/grafana/enterprise-metrics:v2.16.0"
-  - name: headlamp
-    required: false
-    images:
-      - "registry1.dso.mil/ironbank/big-bang/base:2.1.0"
-      - "registry1.dso.mil/ironbank/fluxcd/helm-controller:v1.3.0"
-      - "registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.6.0"
-      - "registry1.dso.mil/ironbank/fluxcd/source-controller:v1.6.1"
-      - "registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.31.1"
-      - "registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4"
-      - "registry1.dso.mil/ironbank/opensource/istio/pilot:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.26.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/background-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/cleanup-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyverno/reports-controller:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno/kyvernopre:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/kyverno:v1.13.4"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1"
-      - "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"
-      - "registry1.dso.mil/ironbank/opensource/prometheus/blackbox_exporter:v0.26.0"
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.12.0
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.12.0
+      - registry1.dso.mil/ironbank/opensource/velero/velero:v1.16.1
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3
+      - registry1.dso.mil/bigbang-ci/velero-tester:1.1.0
