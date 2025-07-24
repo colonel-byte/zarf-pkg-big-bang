@@ -23,54 +23,57 @@ jobs:
     outputs:
       git-tag: ${{ steps.describe.outputs.git_describe }}
     steps:
-      - name: Free Disk Space
-        uses: endersonmenezes/free-disk-space@3f9ec39ebae520864ac93467ee395f5237585c21 # v2.0.0
-        with:
-          remove_android: true
-          remove_dotnet: true
-          remove_haskell: true
-          remove_tool_cache: true
-          remove_swap: true
-          remove_packages: "azure-cli google-cloud-cli microsoft-edge-stable google-chrome-stable firefox postgresql* temurin-* *llvm* mysql* dotnet-sdk-*"
-          remove_packages_one_command: true
-          remove_folders: "/usr/share/swift /usr/share/miniconda /usr/share/az* /usr/share/glade* /usr/local/lib/node_modules /usr/local/share/chromium /usr/local/share/powershell"
-          testing: false
-
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          fetch-depth: 0
-
-      - name: Get git info
-        id: describe
+      - name: check disks
         run: |-
-          echo "git_describe=$(git describe --first-parent --tags)" >> "$GITHUB_OUTPUT"
+          df -h
+      # - name: Free Disk Space
+      #   uses: endersonmenezes/free-disk-space@3f9ec39ebae520864ac93467ee395f5237585c21 # v2.0.0
+      #   with:
+      #     remove_android: true
+      #     remove_dotnet: true
+      #     remove_haskell: true
+      #     remove_tool_cache: true
+      #     remove_swap: true
+      #     remove_packages: "azure-cli google-cloud-cli microsoft-edge-stable google-chrome-stable firefox postgresql* temurin-* *llvm* mysql* dotnet-sdk-*"
+      #     remove_packages_one_command: true
+      #     remove_folders: "/usr/share/swift /usr/share/miniconda /usr/share/az* /usr/share/glade* /usr/local/lib/node_modules /usr/local/share/chromium /usr/local/share/powershell"
+      #     testing: false
 
-      - name: Install The Latest Release Version of Zarf
-        uses: zarf-dev/setup-zarf@10e539efed02f75ec39eb8823e22a5c795f492ae # v1.0.1
+      # - name: Checkout
+      #   uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      #   with:
+      #     fetch-depth: 0
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Get git info
+      #   id: describe
+      #   run: |-
+      #     echo "git_describe=$(git describe --first-parent --tags)" >> "$GITHUB_OUTPUT"
 
-      - name: Login to Registry1
-        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
-        with:
-          registry: registry1.dso.mil
-          username: ${{ secrets.REG_ONE_USER }}
-          password: ${{ secrets.REG_ONE_TOKEN }}
+      # - name: Install The Latest Release Version of Zarf
+      #   uses: zarf-dev/setup-zarf@10e539efed02f75ec39eb8823e22a5c795f492ae # v1.0.1
 
-      - name: Package Zarf package
-        run: |-
-          zarf package create --confirm . \
-            --architecture ${{ matrix.arch }} \
-            --set version=${{ steps.describe.outputs.git_describe }}
+      # - name: Login to GitHub Container Registry
+      #   uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish Zarf package
-        run: |-
-          zarf package publish --signing-key env://COSIGN_KEY --signing-key-pass ${{ secrets.COSIGN_PASS }} zarf-*.zst oci://ghcr.io/${{ github.repository_owner }}/zarf
-        env:
-          COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
+      # - name: Login to Registry1
+      #   uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+      #   with:
+      #     registry: registry1.dso.mil
+      #     username: ${{ secrets.REG_ONE_USER }}
+      #     password: ${{ secrets.REG_ONE_TOKEN }}
+
+      # - name: Package Zarf package
+      #   run: |-
+      #     zarf package create --confirm . \
+      #       --architecture ${{ matrix.arch }} \
+      #       --set version=${{ steps.describe.outputs.git_describe }}
+
+      # - name: Publish Zarf package
+      #   run: |-
+      #     zarf package publish --signing-key env://COSIGN_KEY --signing-key-pass ${{ secrets.COSIGN_PASS }} zarf-*.zst oci://ghcr.io/${{ github.repository_owner }}/zarf
+      #   env:
+      #     COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
