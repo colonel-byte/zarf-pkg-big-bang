@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: minio-instance
+  version: 7.1.1-bb.3
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: minio-instance
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/minio-instance:7.1.1-bb.3
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11
+      - registry1.dso.mil/ironbank/opensource/minio/minio:RELEASE.2025-05-24T17-08-30Z
+      - registry1.dso.mil/ironbank/opensource/minio/operator-sidecar:v7.0.1

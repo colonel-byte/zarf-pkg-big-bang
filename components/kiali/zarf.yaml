@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: kiali
+  version: 2.10.0-bb.2
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: kiali
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/kiali:2.10.0-bb.2
+      - registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v2.10.0
+      - registry1.dso.mil/ironbank/opensource/kiali/kiali:v2.10.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5

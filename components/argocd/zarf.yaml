@@ -1,0 +1,19 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: argocd
+  version: 8.0.10-bb.0
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: argocd
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/argocd:8.0.10-bb.0
+      - registry1.dso.mil/ironbank/big-bang/argocd:v3.0.6
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/bitnami/analytics/redis-exporter:v1.73.0
+      - registry1.dso.mil/ironbank/bitnami/redis:8.0.2
+      - registry1.dso.mil/ironbank/opensource/dexidp/dex:v2.43.1

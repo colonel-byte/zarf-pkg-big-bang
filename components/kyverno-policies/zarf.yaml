@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: kyverno-policies
+  version: 3.3.4-bb.10
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: kyverno-policies
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/kyverno-policies:3.3.4-bb.10
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5

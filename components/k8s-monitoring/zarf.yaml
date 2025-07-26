@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: k8s-monitoring
+  version: 2.0.27-bb.3
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: k8s-monitoring
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/k8s-monitoring:2.0.27-bb.3
+      - registry1.dso.mil/ironbank/opensource/grafana/alloy:v1.8.3
+      - registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.82.1

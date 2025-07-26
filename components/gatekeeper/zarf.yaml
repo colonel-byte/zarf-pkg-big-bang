@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: gatekeeper
+  version: 3.19.1-bb.0
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: gatekeeper
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/gatekeeper:3.19.1-bb.0
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.4
+      - registry1.dso.mil/ironbank/opensource/openpolicyagent/gatekeeper:v3.19.1

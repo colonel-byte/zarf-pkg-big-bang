@@ -1,0 +1,18 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: vault
+  version: 0.30.0-bb.7
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: vault
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/vault:0.30.0-bb.7
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/hashicorp/vault-csi-provider:v1.5.0
+      - registry1.dso.mil/ironbank/hashicorp/vault/vault-k8s:v1.7.0
+      - registry1.dso.mil/ironbank/hashicorp/vault:1.19.5

@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: bbctl
+  version: 2.0.0-bb.3
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: bbctl
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/bbctl:2.0.0-bb.3
+      - registry1.dso.mil/ironbank/big-bang/bbctl:1.4.0
+      - registry1.dso.mil/ironbank/opensource/yq/yq:4.45.4
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal:8.10

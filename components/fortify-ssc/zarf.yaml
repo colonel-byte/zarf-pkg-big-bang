@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: fortify-ssc
+  version: 1.1.2320154-bb.28
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: fortify-ssc
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/fortify-ssc:1.1.2320154-bb.28
+      - registry1.dso.mil/ironbank/bitnami/mysql8:8.0.36-debian-11-r1
+      - registry1.dso.mil/ironbank/google/golang/ubi9/golang-1.24:1.24.4
+      - registry1.dso.mil/ironbank/microfocus/fortify/ssc:25.2.0.0157

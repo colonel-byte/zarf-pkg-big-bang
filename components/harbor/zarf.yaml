@@ -1,0 +1,24 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: harbor
+  version: 1.17.1-bb.1
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: harbor
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/harbor:1.17.1-bb.1
+      - registry1.dso.mil/ironbank/bitnami/redis:8.0.2
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-core:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-exporter:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-jobservice:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-portal:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/harbor-registryctl:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/registry:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/goharbor/trivy-adapter:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/nginx/nginx:1.28.0
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql:17.5

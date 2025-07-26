@@ -2,14 +2,32 @@ name: Release Zarf Package
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #   tags:
-  #     - 'v[0-9]+.[0-9]+.[0-9]+'
+  push:
+    branches:
+      - main
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  release:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - id: set-matrix
+      env:
+        COMP_DIR: components
+      run: |-
+        echo "matrix={\"packages\":[$(ls -d components/* | awk '{printf "%s\"%s\"", sep, $0; sep=","} END {print ""}')]}" >> $GITHUB_OUTPUT
+
+  packages:
+    needs:
+      - setup
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -17,23 +35,9 @@ jobs:
       packages: write
     strategy:
       fail-fast: false
-      matrix:
-        arch:
-          - amd64
+      max-parallel: 10
+      matrix: ${{ fromJSON(needs.setup.outputs.matrix) }}
     steps:
-      - name: Free Disk Space
-        uses: endersonmenezes/free-disk-space@3f9ec39ebae520864ac93467ee395f5237585c21 # v2.0.0
-        with:
-          remove_android: true
-          remove_dotnet: true
-          remove_haskell: true
-          remove_tool_cache: true
-          remove_swap: true
-          remove_packages: "azure-cli google-cloud-cli microsoft-edge-stable google-chrome-stable firefox postgresql* temurin-* *llvm* mysql* dotnet-sdk-*"
-          remove_packages_one_command: true
-          remove_folders: "/usr/share/swift /usr/share/miniconda /usr/share/az* /usr/share/glade* /usr/local/lib/node_modules /usr/local/share/chromium /usr/local/share/powershell"
-          testing: false
-
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -63,11 +67,11 @@ jobs:
 
       - name: Package Zarf package
         run: |-
-          zarf package create --confirm . \
-            --architecture ${{ matrix.arch }} \
+          zarf package create \
+            --confirm ${{ matrix.packages }} \
+            --architecture amd64 \
             --oci-concurrency 15 \
-            --set version=${{ steps.describe.outputs.git_describe }} \
-            --skip-sbom
+            --set version=${{ steps.describe.outputs.git_describe }}
 
       - name: Publish Zarf package
         run: |-
