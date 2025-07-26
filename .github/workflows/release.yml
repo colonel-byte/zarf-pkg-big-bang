@@ -2,11 +2,11 @@ name: Release Zarf Package
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #   tags:
-  #     - 'v[0-9]+.[0-9]+.[0-9]+'
+  push:
+    branches:
+      - main
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   setup:
