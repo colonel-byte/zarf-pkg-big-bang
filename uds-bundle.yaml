@@ -1,0 +1,166 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/main/uds.schema.json
+kind: UDSBundle
+metadata:
+  name: big-bang
+x-keys: &public |-
+  -----BEGIN PUBLIC KEY-----
+  MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE8OI3UGfXCbNY8myt2Dc7M8Y2d5i
+  gpSPeDLCe/vVb1fCLXz7k0BDlDB4z7H6A4CZ9WE1tQ/wBZa2Jd194+SVGw==
+  -----END PUBLIC KEY-----
+packages:
+  - name: anchore
+    repository: ghcr.io/colonel-byte/zarf/anchore
+    ref: 3.7.0-bb.0
+    publicKey: *public
+  - name: argocd
+    repository: ghcr.io/colonel-byte/zarf/argocd
+    ref: 8.0.10-bb.0
+    publicKey: *public
+  - name: authservice
+    repository: ghcr.io/colonel-byte/zarf/authservice
+    ref: 1.0.4-bb.3
+    publicKey: *public
+  - name: bbctl
+    repository: ghcr.io/colonel-byte/zarf/bbctl
+    ref: 2.0.0-bb.3
+    publicKey: *public
+  - name: bigbang
+    repository: ghcr.io/colonel-byte/zarf/bigbang
+    ref: 3.2.0
+    publicKey: *public
+  - name: eck-operator
+    repository: ghcr.io/colonel-byte/zarf/eck-operator
+    ref: 3.0.0-bb.0
+    publicKey: *public
+  - name: elasticsearch-kibana
+    repository: ghcr.io/colonel-byte/zarf/elasticsearch-kibana
+    ref: 1.30.0-bb.2
+    publicKey: *public
+  - name: fluentbit
+    repository: ghcr.io/colonel-byte/zarf/fluentbit
+    ref: 0.49.0-bb.1
+    publicKey: *public
+  - name: fortify-ssc
+    repository: ghcr.io/colonel-byte/zarf/fortify-ssc
+    ref: 1.1.2320154-bb.28
+    publicKey: *public
+  - name: gatekeeper
+    repository: ghcr.io/colonel-byte/zarf/gatekeeper
+    ref: 3.19.1-bb.0
+    publicKey: *public
+  - name: gateway
+    repository: ghcr.io/colonel-byte/zarf/gateway
+    ref: 1.26.1-bb.2
+    publicKey: *public
+  - name: gitlab
+    repository: ghcr.io/colonel-byte/zarf/gitlab
+    ref: 9.1.0-bb.0
+    publicKey: *public
+  - name: gitlab-runner
+    repository: ghcr.io/colonel-byte/zarf/gitlab-runner
+    ref: 0.77.2-bb.0
+    publicKey: *public
+  - name: grafana
+    repository: ghcr.io/colonel-byte/zarf/grafana
+    ref: 9.2.7-bb.0
+    publicKey: *public
+  - name: harbor
+    repository: ghcr.io/colonel-byte/zarf/harbor
+    ref: 1.17.1-bb.1
+    publicKey: *public
+  - name: istio-crds
+    repository: ghcr.io/colonel-byte/zarf/istio-crds
+    ref: 1.26.1-bb.0
+    publicKey: *public
+  - name: istiod
+    repository: ghcr.io/colonel-byte/zarf/istiod
+    ref: 1.26.1-bb.0
+    publicKey: *public
+  - name: k8s-monitoring
+    repository: ghcr.io/colonel-byte/zarf/k8s-monitoring
+    ref: 2.0.27-bb.3
+    publicKey: *public
+  - name: keycloak
+    repository: ghcr.io/colonel-byte/zarf/keycloak
+    ref: 7.0.1-bb.0
+    publicKey: *public
+  - name: kiali
+    repository: ghcr.io/colonel-byte/zarf/kiali
+    ref: 2.10.0-bb.2
+    publicKey: *public
+  - name: kyverno
+    repository: ghcr.io/colonel-byte/zarf/kyverno
+    ref: 3.3.6-bb.5
+    publicKey: *public
+  - name: kyverno-policies
+    repository: ghcr.io/colonel-byte/zarf/kyverno-policies
+    ref: 3.3.4-bb.10
+    publicKey: *public
+  - name: kyverno-reporter
+    repository: ghcr.io/colonel-byte/zarf/kyverno-reporter
+    ref: 3.1.4-bb.0
+    publicKey: *public
+  - name: loki
+    repository: ghcr.io/colonel-byte/zarf/loki
+    ref: 6.30.1-bb.2
+    publicKey: *public
+  - name: mattermost
+    repository: ghcr.io/colonel-byte/zarf/mattermost
+    ref: 10.9.1-bb.2
+    publicKey: *public
+  - name: mattermost-operator
+    repository: ghcr.io/colonel-byte/zarf/mattermost-operator
+    ref: 1.23.0-bb.0
+    publicKey: *public
+  - name: metrics-server
+    repository: ghcr.io/colonel-byte/zarf/metrics-server
+    ref: 3.12.2-bb.4
+    publicKey: *public
+  - name: minio-instance
+    repository: ghcr.io/colonel-byte/zarf/minio-instance
+    ref: 7.1.1-bb.3
+    publicKey: *public
+  - name: minio-operator
+    repository: ghcr.io/colonel-byte/zarf/minio-operator
+    ref: 7.1.1-bb.0
+    publicKey: *public
+  - name: monitoring
+    repository: ghcr.io/colonel-byte/zarf/monitoring
+    ref: 73.2.0-bb.0
+    publicKey: *public
+  - name: neuvector
+    repository: ghcr.io/colonel-byte/zarf/neuvector
+    ref: 2.8.6-bb.0
+    publicKey: *public
+  - name: nexus-repository-manager
+    repository: ghcr.io/colonel-byte/zarf/nexus-repository-manager
+    ref: 81.1.0-bb.0
+    publicKey: *public
+  - name: promtail
+    repository: ghcr.io/colonel-byte/zarf/promtail
+    ref: 6.16.6-bb.5
+    publicKey: *public
+  - name: sonarqube
+    repository: ghcr.io/colonel-byte/zarf/sonarqube
+    ref: 10.7.0-bb.6
+    publicKey: *public
+  - name: tempo
+    repository: ghcr.io/colonel-byte/zarf/tempo
+    ref: 1.21.1-bb.0
+    publicKey: *public
+  - name: thanos
+    repository: ghcr.io/colonel-byte/zarf/thanos
+    ref: 16.0.2-bb.0
+    publicKey: *public
+  - name: twistlock
+    repository: ghcr.io/colonel-byte/zarf/twistlock
+    ref: 0.21.0-bb.0
+    publicKey: *public
+  - name: vault
+    repository: ghcr.io/colonel-byte/zarf/vault
+    ref: 0.30.0-bb.7
+    publicKey: *public
+  - name: velero
+    repository: ghcr.io/colonel-byte/zarf/velero
+    ref: 10.0.1-bb.0
+    publicKey: *public

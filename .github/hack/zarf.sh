@@ -12,6 +12,8 @@ curl -s -L -o ./.direnv/bigbang/oci_package_list.txt https://umbrella-bigbang-re
 
 rm -rf components
 
+yq -i '.packages= []' uds-bundle.yaml
+
 for chart in $(cat .direnv/bigbang/oci_package_list.txt | sort | uniq); do
   export chart_name=$(echo $chart | sed -E 's#registry1.dso.mil/bigbang/##g; s#:.+##g')
   echo "::debug::chart_name='${chart_name}'"
@@ -43,4 +45,10 @@ for chart in $(cat .direnv/bigbang/oci_package_list.txt | sort | uniq); do
   echo "::debug::yq_update='${yq_update}'"
 
   yq ea -i "$yq_images | $yq_update" components/$chart_name/zarf.yaml .direnv/bigbang/charts/$chart_name.yaml
+
+  export yq_uds_component=$(printf '(.packages += ([{"name": "%s", "repository": "ghcr.io/colonel-byte/zarf/%s", "ref": "%s"}]))' "$chart_name" "$chart_name" "$chart_version")
+  echo "::debug::yq_update='${yq_uds_component}'"
+
+  yq -i "$yq_uds_component" uds-bundle.yaml
+  yq -i '.packages[-1].publicKey alias = "public"' uds-bundle.yaml
 done
