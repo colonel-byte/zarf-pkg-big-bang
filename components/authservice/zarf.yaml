@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: authservice
+  version: 1.0.4-bb.3
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: authservice
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/authservice:1.0.4-bb.3
+      - registry1.dso.mil/ironbank/bitnami/redis:7.4.3
+      - registry1.dso.mil/ironbank/istio-ecosystem/authservice:1.0.4-ubi9

@@ -1,0 +1,18 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: anchore
+  version: 3.7.0-bb.0
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: anchore
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/anchore:3.7.0-bb.0
+      - registry1.dso.mil/ironbank/anchore/enterprise/enterprise:5.17.0-amd64
+      - registry1.dso.mil/ironbank/anchore/enterpriseui/enterpriseui:5.17.0-amd64
+      - registry1.dso.mil/ironbank/bitnami/redis:7.4.3
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql:16.2

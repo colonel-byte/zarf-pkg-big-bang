@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: promtail
+  version: 6.16.6-bb.5
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: promtail
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/promtail:6.16.6-bb.5
+      - registry1.dso.mil/ironbank/opensource/grafana/promtail:v3.5.1

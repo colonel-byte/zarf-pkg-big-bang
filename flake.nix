@@ -76,6 +76,7 @@
         );
         shellHook = self.checks.${system}.pre-commit-check.shellHook + ''
           export ZARF_CONFIG=$(git rev-parse --show-toplevel)/zarf-config.yaml
+          export UDS_CONFIG=$(git rev-parse --show-toplevel)/uds-config.yaml
         '';
         buildInputs = self.checks.${system}.pre-commit-check.enabledPackages ++ [
           pkgs.gh

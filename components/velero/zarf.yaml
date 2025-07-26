@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: velero
+  version: 10.0.1-bb.0
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: velero
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/velero:10.0.1-bb.0
+      - registry1.dso.mil/bigbang-ci/velero-tester:1.1.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.12.0
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-microsoft-azure:v1.12.0
+      - registry1.dso.mil/ironbank/opensource/velero/velero:v1.16.1

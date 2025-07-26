@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: sonarqube
+  version: 10.7.0-bb.6
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: sonarqube
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/sonarqube:10.7.0-bb.6
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/big-bang/sonarqube-10:10.7.0-community
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql:16.2

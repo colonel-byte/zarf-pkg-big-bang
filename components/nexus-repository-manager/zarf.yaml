@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: nexus-repository-manager
+  version: 81.1.0-bb.0
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: nexus-repository-manager
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/nexus-repository-manager:81.1.0-bb.0
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6
+      - registry1.dso.mil/ironbank/sonatype/nexus/nexus:3.81.1-01

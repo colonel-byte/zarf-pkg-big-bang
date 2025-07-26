@@ -1,0 +1,31 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: monitoring
+  version: 73.2.0-bb.0
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: monitoring
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/monitoring:73.2.0-bb.0
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.0.1
+      - registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.3
+      - registry1.dso.mil/ironbank/opensource/bats/bats:1.12.0
+      - registry1.dso.mil/ironbank/opensource/ingress-nginx/kube-webhook-certgen:v1.5.4
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kube-state-metrics:v2.15.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
+      - registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-config-reloader:v0.83.0
+      - registry1.dso.mil/ironbank/opensource/prometheus-operator/prometheus-operator:v0.83.0
+      - registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.28.1
+      - registry1.dso.mil/ironbank/opensource/prometheus/blackbox_exporter:v0.26.0
+      - registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.9.1
+      - registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v3.4.1
+      - registry1.dso.mil/ironbank/opensource/prometheus/snmp_exporter:v0.29.0
+      - registry1.dso.mil/ironbank/opensource/thanos/thanos:v0.38.0
+      - registry1.dso.mil/ironbank/opensource/thanos/thanos:v0.38.0
+      - registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6

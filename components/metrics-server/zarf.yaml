@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: metrics-server
+  version: 3.12.2-bb.4
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: metrics-server
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/metrics-server:3.12.2-bb.4
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/metrics-server:v0.7.2
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10

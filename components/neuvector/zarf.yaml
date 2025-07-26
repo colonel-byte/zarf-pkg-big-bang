@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: neuvector
+  version: 2.8.6-bb.0
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: neuvector
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/neuvector:2.8.6-bb.0
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/neuvector/neuvector/controller:5.4.4
+      - registry1.dso.mil/ironbank/neuvector/neuvector/enforcer:5.4.4
+      - registry1.dso.mil/ironbank/neuvector/neuvector/manager:5.4.4
+      - registry1.dso.mil/ironbank/neuvector/neuvector/prometheus-exporter:1-1.0.0
+      - registry1.dso.mil/ironbank/neuvector/neuvector/scanner:6

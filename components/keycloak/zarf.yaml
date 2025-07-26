@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: keycloak
+  version: 7.0.1-bb.0
+  source: https://github.com/colonel-byte/zarf-pkg-big-bang
+  annotations:
+    org.opencontainers.image.source: "https://github.com/colonel-byte/zarf-pkg-big-bang"
+components:
+  - name: keycloak
+    required: true
+    images:
+      - registry1.dso.mil/bigbang/keycloak:7.0.1-bb.0
+      - registry1.dso.mil/ironbank/big-bang/base:2.1.0
+      - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:26.1.4
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql-alpine:15.12
