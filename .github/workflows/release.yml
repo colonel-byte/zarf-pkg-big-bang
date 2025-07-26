@@ -23,7 +23,7 @@ jobs:
       env:
         COMP_DIR: components
       run: |-
-        echo "matrix={\"components\":[$(ls -d components/* | awk '{printf "%s\"%s\"", sep, $0; sep=","} END {print ""}')]}" >> $GITHUB_OUTPUT
+        echo "matrix={\"packages\":[$(ls -d components/* | awk '{printf "%s\"%s\"", sep, $0; sep=","} END {print ""}')]}" >> $GITHUB_OUTPUT
 
   packages:
     needs:
@@ -67,7 +67,7 @@ jobs:
       - name: Package Zarf package
         run: |-
           zarf package create \
-            --confirm ${{ matrix.package }} \
+            --confirm ${{ matrix.packages }} \
             --architecture amd64 \
             --oci-concurrency 15 \
             --set version=${{ steps.describe.outputs.git_describe }}
