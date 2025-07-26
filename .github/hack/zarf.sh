@@ -46,6 +46,10 @@ for chart in $(cat .direnv/bigbang/oci_package_list.txt | sort | uniq); do
 
   yq ea -i "$yq_images | $yq_update" components/$chart_name/zarf.yaml .direnv/bigbang/charts/$chart_name.yaml
 
+  if [ $chart_name = "thanos" ]; then
+    sed -i 's#registry1.dso.mil/ironbank/thanos/thanos#registry1.dso.mil/ironbank/opensource/thanos/thanos#g' components/$chart_name/zarf.yaml
+  fi
+
   export yq_uds_component=$(printf '(.packages += ([{"name": "%s", "repository": "ghcr.io/colonel-byte/zarf/%s", "ref": "%s"}]))' "$chart_name" "$chart_name" "$chart_version")
   echo "::debug::yq_update='${yq_uds_component}'"
 
